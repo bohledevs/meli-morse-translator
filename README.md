@@ -125,6 +125,7 @@ curl --location --request POST 'https://bohledevs-meli-morse.herokuapp.com/morse
 * [spring-boot-starter-test](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test): unit testing
 * [project lombok](https://projectlombok.org/setup/maven): for utility annotations
 * [google java format](https://github.com/google/google-java-format): code style tool
+* [jackson-core](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind): for serialization of Morse Alphabet during unit tests
 
 ---
 ## Challenge Description
