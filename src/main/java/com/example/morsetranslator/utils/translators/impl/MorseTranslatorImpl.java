@@ -24,7 +24,7 @@ public class MorseTranslatorImpl implements MorseTranslator  {
                 .map(word ->
                       Arrays.stream(word.split("[ ]")) // split by letters (1 whitespace)
                             .map(letter ->
-                                      this.morseConfig.getMorseAlphabet().entrySet()
+                                      this.morseConfig.getAlphabet().entrySet()
                                                 .stream().filter(entry -> letter.equals(entry.getValue()))
                                                 .findFirst()
                                                 .orElse(new AbstractMap.SimpleEntry<String, String>(EMPTY_STRING,EMPTY_STRING))
@@ -39,7 +39,7 @@ public class MorseTranslatorImpl implements MorseTranslator  {
                 .map(word ->
                         Arrays.stream(word.split(EMPTY_STRING)) // split by letters (empty string)
                                 .map(letter ->
-                                        this.morseConfig.getMorseAlphabet().entrySet()
+                                        this.morseConfig.getAlphabet().entrySet()
                                                 .stream().filter(entry -> letter.equals(entry.getKey()))
                                                 .findFirst()
                                                 .orElse(new AbstractMap.SimpleEntry<String, String>(EMPTY_STRING,EMPTY_STRING))

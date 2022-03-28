@@ -5,10 +5,12 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /** DTO both for requests and responses. */
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class MorseDto {
   @NotNull(message = "text can't be null")
