@@ -1,0 +1,5 @@
+server:
+  port: 8080
+  error:
+    include-exception: true # lets user see the exception canonical on 400 status code (invalid MorseDto)
+    include-binding-errors: always # lets the user see the cause of the constraint validation error.
