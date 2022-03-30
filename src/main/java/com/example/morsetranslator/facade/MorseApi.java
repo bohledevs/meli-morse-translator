@@ -3,7 +3,10 @@ package com.example.morsetranslator.facade;
 import com.example.morsetranslator.domain.dto.MorseDto;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,8 @@ public interface MorseApi {
    * @return {@link MorseDto} text in morse code.
    */
   @PostMapping("/bits2morse")
+  @Cacheable(value = "morseCache", key = "#morseDto.text")
+  @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 10000))
   ResponseEntity<MorseDto> bitsToMorse(@RequestBody @Valid @NotNull MorseDto morseDto);
 
   /**
@@ -32,6 +37,8 @@ public interface MorseApi {
    * @return {@link MorseDto} text in natural language.
    */
   @PostMapping("/2text")
+  @Cacheable(value = "morseCache", key = "#morseDto.text")
+  @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 10000))
   ResponseEntity<MorseDto> morseToHuman(@RequestBody @Valid @NotNull MorseDto morseDto);
 
   /**
@@ -41,5 +48,7 @@ public interface MorseApi {
    * @return {@link MorseDto} text in morse.
    */
   @PostMapping("/2morse")
+  @Cacheable(value = "morseCache", key = "#morseDto.text")
+  @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 10000))
   ResponseEntity<MorseDto> humanToMorse(@RequestBody @Valid @NotNull MorseDto morseDto);
 }

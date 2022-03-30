@@ -24,6 +24,6 @@ public class MorseController implements MorseApi {
 
   @Override
   public ResponseEntity<MorseDto> humanToMorse(MorseDto morseDto) {
-    return ResponseEntity.ok(this.morseService.translate2Morse(morseDto.getText()));
+    return ResponseEntity.ok(morseService.translate2Morse(morseDto.getText()));
   }
 }

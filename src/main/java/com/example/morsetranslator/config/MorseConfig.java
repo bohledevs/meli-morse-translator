@@ -5,7 +5,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-/** This class loads */
+/** This class loads the morse alphabet from the application properties */
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "morse")
