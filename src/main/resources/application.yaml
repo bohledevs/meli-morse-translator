@@ -44,7 +44,7 @@ morse:
     ".": ".-.-.-"
 
 spring:
-  cache:
-    caffeine:
+  cache: # for caching
+    caffeine: # for ttl
       spec: expireAfterWrite=5m
     cache-names: morseCache

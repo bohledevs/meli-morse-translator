@@ -5,6 +5,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,7 @@ public interface MorseApi {
    */
   @PostMapping("/bits2morse")
   @Cacheable(value = "morseCache", key = "#morseDto.text")
+  @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 10000))
   ResponseEntity<MorseDto> bitsToMorse(@RequestBody @Valid @NotNull MorseDto morseDto);
 
   /**
@@ -35,6 +38,7 @@ public interface MorseApi {
    */
   @PostMapping("/2text")
   @Cacheable(value = "morseCache", key = "#morseDto.text")
+  @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 10000))
   ResponseEntity<MorseDto> morseToHuman(@RequestBody @Valid @NotNull MorseDto morseDto);
 
   /**
@@ -45,5 +49,6 @@ public interface MorseApi {
    */
   @PostMapping("/2morse")
   @Cacheable(value = "morseCache", key = "#morseDto.text")
+  @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 10000))
   ResponseEntity<MorseDto> humanToMorse(@RequestBody @Valid @NotNull MorseDto morseDto);
 }
