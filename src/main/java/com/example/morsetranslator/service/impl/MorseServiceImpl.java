@@ -17,17 +17,17 @@ public class MorseServiceImpl implements MorseService {
 
   @Override
   public MorseDto decodeBits2Morse(String bits) {
-    return new MorseDto(this.bitsDecoder.decodeBitString(bits));
+    return new MorseDto(bitsDecoder.decodeBitString(bits));
   }
 
   @Override
   public MorseDto translate2Human(String morse) {
-    return new MorseDto(this.morseTranslator.morseToHuman(morse));
+    return new MorseDto(morseTranslator.morseToHuman(morse));
   }
 
   @Override
   public MorseDto translate2Morse(String human) {
-    return new MorseDto(this.morseTranslator.humanToMorse(human));
+    return new MorseDto(morseTranslator.humanToMorse(human));
   }
 
 }

@@ -18,7 +18,6 @@ public class BitsDecoderImpl implements BitsDecoder {
 
   @Override
   public String decodeBitString(String bits) {
-
     String sanitizedBits = sanitize(bits);
     PulseMetric metric = buildPulseMetric(sanitizedBits);
     return Pattern.compile("1+|0+")
@@ -30,6 +29,13 @@ public class BitsDecoderImpl implements BitsDecoder {
         .reduce("", String::concat);
   }
 
+  /**
+   * Sorts out each type of pulse or pause the client sent.
+   *
+   * @param pulse {@link String} bit substring
+   * @param pulseMetric {@link PulseMetric} Metrics collected beforehand
+   * @return {@link PulseTypes} type of pulse or pause
+   */
   private PulseTypes getPulseType(String pulse, PulseMetric pulseMetric) {
     int length = pulse.length();
 
@@ -84,6 +90,12 @@ public class BitsDecoderImpl implements BitsDecoder {
         .build();
   }
 
+  /**
+   * Turns a stream of strings into a stream of integers
+   *
+   * @param supplier {@link Supplier} reusable stream of strings supplier
+   * @return {@link IntStream} stream of integers
+   */
   private IntStream getIntStream(Supplier<Stream<String>> supplier) {
     return supplier.get().mapToInt(String::length);
   }
