@@ -42,3 +42,9 @@ morse:
     "8": "---.."
     "9": "----."
     ".": ".-.-.-"
+
+spring:
+  cache:
+    caffeine:
+      spec: expireAfterWrite=5m
+    cache-names: morseCache

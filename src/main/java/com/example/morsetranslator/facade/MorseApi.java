@@ -3,6 +3,7 @@ package com.example.morsetranslator.facade;
 import com.example.morsetranslator.domain.dto.MorseDto;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ public interface MorseApi {
    * @return {@link MorseDto} text in morse code.
    */
   @PostMapping("/bits2morse")
+  @Cacheable(value = "morseCache", key = "#morseDto.text")
   ResponseEntity<MorseDto> bitsToMorse(@RequestBody @Valid @NotNull MorseDto morseDto);
 
   /**
@@ -32,6 +34,7 @@ public interface MorseApi {
    * @return {@link MorseDto} text in natural language.
    */
   @PostMapping("/2text")
+  @Cacheable(value = "morseCache", key = "#morseDto.text")
   ResponseEntity<MorseDto> morseToHuman(@RequestBody @Valid @NotNull MorseDto morseDto);
 
   /**
@@ -41,5 +44,6 @@ public interface MorseApi {
    * @return {@link MorseDto} text in morse.
    */
   @PostMapping("/2morse")
+  @Cacheable(value = "morseCache", key = "#morseDto.text")
   ResponseEntity<MorseDto> humanToMorse(@RequestBody @Valid @NotNull MorseDto morseDto);
 }
